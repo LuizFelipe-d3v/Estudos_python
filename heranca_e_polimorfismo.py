@@ -1,4 +1,6 @@
-class Conta:
+import abc
+
+class Conta(abc.ABC):
     def __init__(self, numero, titular, saldo=0.0, limite=1000.0):
         self._numero = numero
         self._titular = titular
@@ -16,7 +18,8 @@ class Conta:
             self._saldo -= valor
         else:
             print("Saldo insuficiente!")
-
+    
+    @abc.abstractmethod
     def atualiza(self, taxa):
         self._saldo += self._saldo * taxa
         return self._saldo
@@ -60,28 +63,51 @@ class AtualizadorDeContas:
         self._saldo_total += conta.atualiza(self._selic)
         print(f"Saldo final da conta ({conta._titular}): {conta.saldo():.2f}")
 
+class ContaInvestimento(Conta):
+    def atualiza(self, taxa):
+        self._saldo += self._saldo * taxa * 5
+
 
 if __name__ == '__main__':
-    c = Conta('123-4', 'Joao', 1000.0)
-    cc = ContaCorrente('123-5', 'Jose', 1000.0)
-    cp = ContaPoupanca('123-6', 'Maria', 1000.0)
+    cc = ContaCorrente('123-4', 'João', 1000.0)
+    cp = ContaPoupanca('123-5', 'José', 1000.0)
+    ci = ContaInvestimento('123-6', 'Maria', 1000.0)
 
-    print("=== Atualizacao Individual ===")
-    c.atualiza(0.01)
     cc.atualiza(0.01)
     cp.atualiza(0.01)
+    ci.deposita(1000.0)
+    ci.atualiza(0.01)
 
-    print(f"Conta Comum - Saldo: {c.saldo():.2f}")
-    print(f"Conta Corrente - Saldo: {cc.saldo():.2f}")
-    print(f"Conta Poupanca - Saldo: {cp.saldo():.2f}")
+
+    print(cc.saldo)
+    print(cp.saldo)
+    print(ci.saldo)
+    
+    
+    # c = Conta('123-4', 'Joao', 1000.0)
+    # cc = ContaCorrente('123-5', 'Jose', 1000.0)
+    # cp = ContaPoupanca('123-6', 'Maria', 1000.0)
+
+    # print("=== Atualizacao Individual ===")
+    # c.atualiza(0.01)
+    # cc.atualiza(0.01)
+    # cp.atualiza(0.01)
+
+    # print(f"Conta Comum - Saldo: {c.saldo():.2f}")
+    # print(f"Conta Corrente - Saldo: {cc.saldo():.2f}")
+    # print(f"Conta Poupanca - Saldo: {cp.saldo():.2f}")
 
     print("\n=== Teste __str__ ===")
     print(cc)
+    print()
+    print(cp)
+    print()
+    print(ci)
 
-    print("\n=== Atualizador de Contas ===")
-    adc = AtualizadorDeContas(0.01)
-    adc.roda(c)
-    adc.roda(cc)
-    adc.roda(cp)
+    # print("\n=== Atualizador de Contas ===")
+    # adc = AtualizadorDeContas(0.01)
+    # adc.roda(c)
+    # adc.roda(cc)
+    # adc.roda(cp)
 
-    print(f"\nSaldo total de todas as contas: {adc.saldo_total():.2f}")
+    # print(f"\nSaldo total de todas as contas: {adc.saldo_total():.2f}")
