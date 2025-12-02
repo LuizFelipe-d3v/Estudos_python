@@ -48,21 +48,32 @@ def soma_negativos(lista):
 
 numeros = [12, -2, 4, 8, 29, 45, 78, 36, -17, 2, 12, 8, 3, 3, -52]
 
-print("===== Maior Elemento =====")
-print(maior_elemento(numeros))
+def switch_case(valor):
+    if valor == 1:
+        print("===== Maior Elemento =====")
+        print(maior_elemento(numeros))
 
-print("===== Menor Elemento =====")
-print(menor_elemento(numeros))
+    if valor == 2:
+        print("===== Menor Elemento =====")
+        print(menor_elemento(numeros))
 
-print("===== Numeros Pares =====")
-print(num_pares(numeros))
+    if valor == 3:
+        print("===== Numeros Pares =====")
+        print(num_pares(numeros))
 
-print("===== Ocorrencias do Primeiro Elemento da Lista =====")
-print(primeiro_elemento(numeros))
+    if valor == 4:
+        print("===== Ocorrencias do Primeiro Elemento da Lista =====")
+        print(primeiro_elemento(numeros))
 
-print("===== Media dos Elementos =====")
-print(media_elementos(numeros))
+    if valor == 5:
+        print("===== Media dos Elementos =====")
+        print(media_elementos(numeros))
 
-print("===== Soma dos Valores Negativos =====")
-print(soma_negativos(numeros))
+    if valor == 6:
+        print("===== Soma dos Valores Negativos =====")
+        print(soma_negativos(numeros))
+
+
+print(switch_case(2))
+
 
